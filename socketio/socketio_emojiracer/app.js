@@ -9,11 +9,11 @@ app.use(express.static('public'));
 const players = {player1: 100, player2: 0};
 const delta = 5;
 
-//uppon connection, the server emits the players data to all clients 
+//upon connection, the server emits the players data to all clients 
 io.on('connect',(socket)=>{
 	console.log(socket.id,"connected!");
 	//emits the players to everyone 
-	socket.emit("update",players); 
+	socket.emit("update",players); //send a message to this connected client only!
 
 
 	//changes the position by 5 
@@ -21,7 +21,7 @@ io.on('connect',(socket)=>{
 	socket.on('update',(k) => {
 		console.log(k);
 		players[k]+=delta;
-		io.emit('update',players); //broadcasts to everyone the players data 
+		io.emit('update',players); //broadcasts to everyone the players data (including connected)
 	});
 });
 
