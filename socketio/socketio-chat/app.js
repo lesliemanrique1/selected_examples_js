@@ -13,6 +13,8 @@ io.on('connect', (socket) => {
     // socket represents the connected client
     console.log(socket.id, 'connected');
 
+    // EMITS TO EVERYONE
+
     // listen -> define what the server will handle (chat message)
     socket.on('chat message', (data) => {
         // broadcast them to all connected clients
